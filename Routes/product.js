@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 router.get("/get/featured", async (req, res) => {
   const featuredProducts = await Product.find({ isFeatured: true });
   const countfeaturedProducts = await Product.countDocuments({
-    countInStock: { $gt: 10 },
+    countInStock: { $gt: 100 },
   });
 
   if (featuredProducts || countfeaturedProducts) {

@@ -19,6 +19,27 @@ router.get('/', async (req, res) => {
     }
 }
 );
+router.get("/get/count", async (req, res) => {
+  const countUser = await   User.find().countDocuments();
+  
+  
+
+  if (countUser) {
+    res.status(200).json({
+      message: "User fetched successfully",
+        count: countUser,
+   
+    });
+  } else {
+    res.status(500).json({
+      message: "Error fetching featured products",
+      error: error,
+    });
+  }
+});
+
+
+
 
 router.post('/', async (req, res) => {
     try {
@@ -66,7 +87,7 @@ router.post('/login', async (req, res) => {
             );
             res.status(200).json({
                 message: 'User logged in successfully',
-                user: user.email,
+                user: user,
                 token: token,
               
             });
