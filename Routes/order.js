@@ -104,14 +104,14 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    // Find and delete the order by ID
+    
     const order = await Order.findByIdAndDelete(req.params.id);
 
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    // Delete all associated order items
+   
     await Promise.all(
       order.orderItems.map((orderItemId) => {
         return OrderItem.findByIdAndDelete(orderItemId);
